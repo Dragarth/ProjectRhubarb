@@ -14,6 +14,8 @@ public class DroneController : MonoBehaviour
     bool setPlayer = false;
     private float vert;
     private float horiz;
+    private float mouse_vertical;
+    private float mouse_horizontal;
     private float turnAmount;
 
     float bulletFireDelay = 0.25f;
@@ -47,13 +49,11 @@ public class DroneController : MonoBehaviour
                 rB.gravityScale = 0;
                 rB.velocity = Vector2.zero;
                 rB.angularVelocity = 0.0f;
-            }
-            else
+            } else
             {
                 rB.gravityScale = 0.2f;
             }
-        }
-        else
+        } else
         {
             rB.gravityScale = 0;
             rB.velocity = Vector2.zero;
@@ -67,6 +67,11 @@ public class DroneController : MonoBehaviour
                 droneArm.transform.eulerAngles.y,
                 turnAmount - 90.0f
                 );
+        } else // the player is using a keyboard, lets follow the mouse instead
+        {
+            var objectPos = Camera.main.WorldToScreenPoint(droneArm.transform.position);
+            var dir = Input.mousePosition - objectPos;
+            droneArm.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg));
         }
 
     }
@@ -80,21 +85,39 @@ public class DroneController : MonoBehaviour
     {
         vert = -iC.RightVertical();
         horiz = iC.RightHorizontal();
+
+        var playerScreenPoint = Camera.main.WorldToViewportPoint(transform.position);
+        if (Camera.main.ScreenToViewportPoint(Input.mousePosition).x < playerScreenPoint.x)
+        {
+            Debug.Log("to the left of the player");
+        }
+        if (Camera.main.ScreenToViewportPoint(Input.mousePosition).y < playerScreenPoint.y)
+        {
+            Debug.Log("below the player");
+        }
+
         turnAmount = (Mathf.Atan2(horiz, vert) * Mathf.Rad2Deg);
-        if(horiz < 0)
+        if (horiz < 0)
         {
             GetComponent<SpriteRenderer>().flipX = true;
-        }
-        else if(horiz > 0)
+        } else if (horiz > 0)
         {
             GetComponent<SpriteRenderer>().flipX = false;
         }
-        
-        if(iC.RightTrigger() > 0 && canFire)
+
+        if ((iC.RightTrigger() > 0 && canFire) || (Input.GetButton("Fire1") && canFire))
         {
             canFire = false;
             StartCoroutine(HoldingRightTrigger());
         }
+    }
+
+    void OnGUI()
+    {
+        GUI.TextArea(new Rect(10, 10, 150, 100),
+            "vertical: " + vert +
+            "\nhorizontal: " + horiz +
+            "\nturn amount: " + turnAmount);
     }
 
     IEnumerator HoldingRightTrigger()
