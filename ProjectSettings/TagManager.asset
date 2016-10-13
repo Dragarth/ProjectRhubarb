@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Boss
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -49,4 +51,10 @@ TagManager:
     locked: 0
   - name: PlayerArm
     uniqueID: 1020836501
+    locked: 0
+  - name: Boss
+    uniqueID: 1238638299
+    locked: 0
+  - name: BossArm
+    uniqueID: 4006156835
     locked: 0

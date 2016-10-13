@@ -23,9 +23,10 @@ GameObject:
   - 50: {fileID: 50000012033573260}
   - 114: {fileID: 114000013013294968}
   - 114: {fileID: 114000010980327272}
+  - 60: {fileID: 60000014182248892}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,8 +54,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011754922896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -7.88, y: 0, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000012780895304}
@@ -88,8 +89,46 @@ Rigidbody2D:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!60 &60000014182248892
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011754922896}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 0.565, y: -0.645}
+      - {x: 0.60499996, y: -0.555}
+      - {x: 0.655, y: -0.345}
+      - {x: 0.655, y: 0.315}
+      - {x: 0.615, y: 0.525}
+      - {x: 0.505, y: 0.78499997}
+      - {x: 0.405, y: 0.91499996}
+      - {x: 0.235, y: 1.0749999}
+      - {x: 0.16499999, y: 1.105}
+      - {x: -0.185, y: 1.105}
+      - {x: -0.265, y: 1.055}
+      - {x: -0.435, y: 0.875}
+      - {x: -0.505, y: 0.765}
+      - {x: -0.59499997, y: 0.575}
+      - {x: -0.625, y: 0.445}
+      - {x: -0.655, y: 0.33499998}
+      - {x: -0.655, y: -0.36499998}
+      - {x: -0.555, y: -0.685}
+      - {x: -0.48499998, y: -0.815}
+      - {x: -0.305, y: -1.025}
+      - {x: -0.145, y: -1.105}
+      - {x: 0.155, y: -1.105}
+      - {x: 0.305, y: -1.025}
+      - {x: 0.445, y: -0.875}
 --- !u!114 &114000010980327272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,9 +151,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e1ee22802e0c4745843ba4cc4293260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectedByGravity: 0
-  speed: 7.5
   droneArm: {fileID: 1000013804263522}
+  controllerNumber: 2
+  canFly: 0
+  useKeyboard: 0
+  useTwinStick: 0
+  speed: 7.5
+  jumpStrength: 12
+  canDoubleJump: 0
+  currentGroundDist: 0
   bullet: {fileID: 1000012100130670, guid: 90cdf551df857f24fa1dfd3cfb667eb7, type: 2}
 --- !u!212 &212000010678869528
 SpriteRenderer:
